@@ -6,12 +6,15 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Scaffold
@@ -22,6 +25,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
@@ -29,6 +33,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.compose.ui.theme.ComposeTheme
 
@@ -112,7 +117,7 @@ fun PositioningColumn() {
 }
 
 @Composable
-fun PositioningRow(){
+fun PositioningRow() {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
@@ -124,10 +129,10 @@ fun PositioningRow(){
 }
 
 @Composable
-fun ShowBox(){
+fun ShowBox() {
     Box(
         contentAlignment = Alignment.BottomEnd
-    ){
+    ) {
         Text(text = "A")
         Text(text = "B")
 
@@ -135,19 +140,42 @@ fun ShowBox(){
 }
 
 @Composable
-fun ListViewItem(){
-    Row {
+fun ListViewItem(imgId: Int, name: String) {
+    Row(Modifier.padding(10.dp)) {
         Image(
-            painter = painterResource(R.drawable.ic_person),
-            contentDescription = "")
-    Column (){
-        Text(
-            text = "",
-            fontWeight = FontWeight.Bold
+            painter = painterResource(imgId),
+            contentDescription = "",
+            Modifier.size(35.dp)
         )
+        Column() {
+            Text(
+                text = name,
+                fontWeight = FontWeight.Bold,
+                color = Color.Red
+            )
+            Text(
+                text = "Android Developer",
+                fontSize = 12.sp,
+                fontWeight = FontWeight.Thin
+            )
 
+        }
     }
-}}
+}
+
+//Use of modifier
+@Composable
+fun CircularImage() {
+    Image(
+        painter = painterResource(R.drawable.ic_heart),
+        contentScale = ContentScale.Crop,
+        colorFilter = ColorFilter.tint(Color.Red),
+        modifier = Modifier.size(70.dp)
+            .clip(CircleShape)
+            .border(2.dp, Color.Black, CircleShape),
+        contentDescription = " ")
+
+}
 
 
 @Preview(showBackground = true)
@@ -159,7 +187,15 @@ private fun ShowPreview() {
 //    ShowTextInput()
 //    PositioningColumn()
 //    PositioningRow()
-    ShowBox()
-
-}
+//    ShowBox()
+//    Column {
+//        ListViewItem(R.drawable.ic_person, "Bheem")
+//        ListViewItem(R.drawable.ic_person, "Chutki")
+//        ListViewItem(R.drawable.ic_person, "Dholu")
+//        ListViewItem(R.drawable.ic_person, "Bholu")
+//        ListViewItem(R.drawable.ic_person, "Kichak")
+//    }
+//    CircularImage()
+//    BlogCategory()
+} 
 
